@@ -1,11 +1,14 @@
+let allOpenRequests = []; 
+
 
 class CarryBuddy{
-	constructor(name, location, email, requests, ratings){
+	constructor(name, location, email, requests, ratings, events){
 		this.name = name;
 		this.location = location;
 		this.email = email;
 		this.requests = []; 
 		this.ratings = [];
+		this.events = [];
 		this.average_rating = 0;
 		this.sum = 0;
 		this.num = 0;
@@ -16,53 +19,47 @@ class CarryBuddy{
 		allOpenRequests.push(request);
 	}
 
-	viewNearbyRequests(location){
+	viewNearbyRequests(...location){  // works with ...? to search +1 locations
 		if (allOpenRequests.length < 0) {
 			console.log("No carry buddies are needed here right now.")
 		}
 		else {
 			console.log("Here are the open requests in " + arguments[0] + ":");
-			let filteredRequests = [];
-			filteredRequests = allOpenRequests;
+			let requestsBeforeFiltering = [];
+			requestsBeforeFiltering = allOpenRequests;
 
-			function getKeyByValue(filteredRequests, location) {   // https://stackoverflow.com/questions/9907419/javascript-object-get-key-by-value
-				return Object.keys(filteredRequests).find(key => filteredRequests[key] === location);
-			}
+			filteredRequests = location => requestsBeforeFiltering.find(function(o){
+				return o.location === location;
+			});
+			console.log(filteredRequests);
 
-
-			//filteredRequests.map(location) {
-			//	console.log(Object.getOwnPropertyNames(filteredRequests));
-			//};
-			// IF location matches Berlin:
-			// in allOpenRequests loop through by location name,
-			// return only 'name, location, email and request'" 
 		}
 
 	}
 
-	viewNearbyBuddies(buddies, location){  // do the same above, but for ppl
+	viewNearbyBuddies(location){  // do the same above, but for ppl
 		// return list of ALL people
 		// in location X
 		// return only name, location, email, average rating
 	}
 
 	offerHelp(buddy, request) {
-		// hi buddy, i can help out w request
+		// person2 chooses to help person1 in UI push a button..
+		// set buddy1.request.whatevername.buddyFound to True
+		// if above set to True: buddy1.requests.whatevername remove from reuqests
+		// delete from AllOpenRequests[];
+		// to both buddies: receive confirmation with all info.
 	}
 
-	confirmHelp(buddy, request) {
-		// hi buddy, i accept help w request
-		buddy.sendConfirmation()
-	}
 
-	sendConfirmation(){
+	receiveConfirmation(){
 		// send same message to both?
+		// get all info for item x 
 		console.log("Buddy X and X will meet at date, location to carry item X.");
 	}
 
 	writeFeedback(buddy, rating, comment){
 		buddy.receiveFeedback(new Feedback(rating, comment, this))
-		this.request.remove // find by name and remove
 	}
 
 	receiveFeedback(rating){ // by monikks
@@ -77,12 +74,13 @@ class CarryBuddy{
 }
 
 class Request {
-	constructor(owner, itemName, location, date, time){
-		this.owner = owner;
+	constructor(itemName, location, date, time, buddyFound){
 		this.itemName = itemName;
 		this.location = location;  // do I need this here?
 		this.date = date;
 		this.time = time;
+		this.buddyFound = false;
+
 	}
 }
 
@@ -94,10 +92,15 @@ class Review {
 	}
 }
 
+carrybuddies = [];
+getCarryBuddyByName = name => carrybuddies.find(function(o){return o.name === name;});
 
-const allOpenRequests = []; 
+carrybuddy1 = new CarryBuddy("Gracia", "Berlin", "g@racia.com");
+carrybuddy2 = new CarryBuddy("Piet", "Berlin", "p@iet.com");
+carrybuddy3 = new CarryBuddy("Henk","Stuttgart","h@enk.com");
 
-carrybuddy1 = new CarryBuddy("Gracia", "Berlin", "g@racia.com")
-
+carrybuddies.push(carrybuddy1);
+carrybuddies.push(carrybuddy2);
+carrybuddies.push(carrybuddy3);
 
 
