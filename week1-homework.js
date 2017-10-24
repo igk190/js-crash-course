@@ -44,22 +44,31 @@ class CarryBuddy{
 	}
 
 	offerHelp(buddy, request) {
-		// person2 chooses to help person1 in UI push a button..
-		// set buddy1.request.whatevername.buddyFound to True: where to build this in?
-		// if above set to True: buddy1.requests.whatevername remove from reuqests
+		this.upcomingEvents.push(request); // add check if request.budFound = true already
+		buddy.receiveHelp();
+		this.receiveConfirmation();
+		buddy.receiveConfirmation();
+
 		// delete from AllOpenRequests[];
-		// to both buddies: receive confirmation with all info.
+	}
+
+	receiveHelp(buddy, request) {
+		this.upcomingEvents.push(request)
+		this.request.buddyFound = true;
+		this.requests.remove(request);
 	}
 
 
-	receiveConfirmation(){
-		// send same message to both?
+	receiveConfirmation(buddy, request){ // mssg to both parties?
 		// get all info for item x 
 		console.log("Buddy X and X will meet at date, location to carry item X.");
 	}
 
 	writeReview(buddy, rating, comment){ // by monikks
 		buddy.receiveReview(new Review(rating, comment, this))
+		this.upcomingEvents.remove(request);
+		buddy.upcomingEvents.remove(requests);
+		// args stimmen nicht at all
 	}
 
 	receiveReview(rating){ // by monikks
