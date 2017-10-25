@@ -2,13 +2,13 @@ let allOpenRequests = [];
 
 
 class CarryBuddy{
-	constructor(name, location, email, requests, ratings, upcomingEvents){
+	constructor(name, location, email, requests, upcomingEvents, ratings){
 		this.name = name;
 		this.location = location;
 		this.email = email;
 		this.requests = []; 
-		this.ratings = [];
 		this.upcomingEvents = [];
+		this.ratings = [];
 		this.average_rating = 0;
 		this.sum = 0;
 		this.num = 0;
@@ -20,27 +20,34 @@ class CarryBuddy{
 	}
 
 	viewNearbyRequests(location){  // look for one location at a time
-		if (allOpenRequests.length < 0) { // incorrect, should be if length AT LOCATION < 0
-			console.log("No carry buddies are needed here right now.")
+		let openRequestsByLocation = allOpenRequests.filter(function(loc) {
+				return loc.location === location
+			});
+
+		if (openRequestsByLocation.length < 0) {
+			console.log("No open requests in this area right now.")
 		}
 		else {
 			console.log("Here are the open requests in " + arguments[0] + ":");
-			let openRequestsByLocation = allOpenRequests.filter(function(loc) {
-				return loc.location === location
-			});
 			console.log(openRequestsByLocation);
-		} // extra: return only item, location, name, date, time.
+		} // extra @ else: return only item, location, name, date, time.
 
 	}
 
 	viewNearbyBuddies(location){		
-		let nearbyBuddies = carrybuddies.filter(function(el) {
-			return el.location === location
+		let nearbyBuddies = carrybuddies.filter(function(bud) {
+			return bud.location === location
 		});
-		console.log(nearbyBuddies);
-		// extra: return only name, location, email, average rating per buddy
-		// extra: build if-else for if AT LOCATION no buddies exist
-		//with else "Sorry, no one around here."
+
+		if (nearbyBuddies.length < 0) {
+			console.log("Sorry, no one around here.");
+		}
+
+		else {
+			console.log(nearbyBuddies);
+		}
+		// extra @ else: return only name, location, email, average rating per buddy
+
 	}
 
 	offerHelp(buddy, request) {
@@ -83,10 +90,10 @@ class CarryBuddy{
 }
 
 class Request {
-	constructor(itemName, owner, location, date, time, buddyFound){
+	constructor(itemName,location, owner, date, time, buddyFound){
 		this.itemName = itemName;
-		this.owner = owner; // SET TO OWNER whos array it is pushed to
 		this.location = location;  // do I need this?
+		this.owner = owner; // SET TO OWNER whos array it is pushed to
 		this.date = date;
 		this.time = time;
 		this.buddyFound = false;
@@ -104,6 +111,7 @@ class Review {
 
 carrybuddies = [];
 getCarryBuddyByName = name => carrybuddies.find(function(o){return o.name === name;});
+getCarryBuddyByLocation = location => carr //// ?
 
 carrybuddy1 = new CarryBuddy("Gracia", "Berlin", "g@racia.com");
 carrybuddy2 = new CarryBuddy("Piet", "Berlin", "p@iet.com");
