@@ -24,7 +24,7 @@ class CarryBuddy{
 				return loc.location === location
 			});
 
-		if (openRequestsByLocation.length < 0) {
+		if (openRequestsByLocation.length < 0) { // not functioning atm.
 			console.log("No open requests in this area right now.")
 		}
 		else {
@@ -35,8 +35,11 @@ class CarryBuddy{
 	}
 
 	viewNearbyBuddies(location){		
-		let nearbyBuddies = carrybuddies.filter(function(bud) {
-			return bud.location === location
+		let nearbyBuddies = carrybuddies.filter(function(o) {
+			return o.location === location
+
+
+		
 		});
 
 		if (nearbyBuddies.length < 0) {
@@ -45,7 +48,16 @@ class CarryBuddy{
 
 		else {
 			console.log(nearbyBuddies);
-		}
+			
+			for (var singleProps in nearbyBuddies) {  // trying to access props of individual objects in nearbybuddies array..
+				Object.keys(singleProps).forEach(function(key) {
+					(console.log(key) + ': ' + singleProps[key]);
+				})
+			} // closing for loop
+
+
+
+		} // closing else
 		// extra @ else: return only name, location, email, average rating per buddy
 
 	}
@@ -55,14 +67,13 @@ class CarryBuddy{
 		buddy.receiveHelp();
 		this.receiveConfirmation();
 		buddy.receiveConfirmation();
-
-		// delete from AllOpenRequests[];
 	}
 
 	receiveHelp(buddy, request) {
 		this.upcomingEvents.push(request)
 		this.request.buddyFound = true;
 		this.requests.remove(request);
+		allOpenRequests.remove(request);
 	}
 
 
