@@ -24,7 +24,7 @@ class CarryBuddy{
 				return loc.location === location
 			});
 
-		if (openRequestsByLocation.length < 0) { // not functioning atm.
+		if (openRequestsByLocation.length === 0) { // not functioning atm.
 			console.log("No open requests in this area right now.")
 		}
 		else {
@@ -42,20 +42,19 @@ class CarryBuddy{
 		
 		});
 
-		if (nearbyBuddies.length < 0) {
+		if (nearbyBuddies.length === 0) {
 			console.log("Sorry, no one around here.");
 		}
 
 		else {
+			console.log("Here are all carry buddies in " + arguments[0] + ":");
 			console.log(nearbyBuddies);
 			
 			for (var singleProps in nearbyBuddies) {  // trying to access props of individual objects in nearbybuddies array..
-				Object.keys(singleProps).forEach(function(key) {
-					(console.log(key) + ': ' + singleProps[key]);
+				Object.keys(singleProps).forEach(function(key) { // 0: 0
+					(console.log(key + ': ' + singleProps[key]));
 				})
 			} // closing for loop
-
-
 
 		} // closing else
 		// extra @ else: return only name, location, email, average rating per buddy
@@ -71,7 +70,7 @@ class CarryBuddy{
 
 	receiveHelp(buddy, request) {
 		this.upcomingEvents.push(request)
-		this.request.buddyFound = true;
+		this.request[0].buddyFound = true;
 		this.requests.remove(request);
 		allOpenRequests.remove(request);
 	}
@@ -132,4 +131,12 @@ carrybuddies.push(carrybuddy1);
 carrybuddies.push(carrybuddy2);
 carrybuddies.push(carrybuddy3);
 
+console.log("++++++++++++++++++++++++++++++++++++++++++")
+carrybuddy1.viewNearbyBuddies("Berlin")
+carrybuddy1.viewNearbyBuddies("Bllllln")
 
+carrybuddy1.publishRequest(request1 = new Request("really big cupboard", "Berlin"))
+carrybuddy1.publishRequest(request1 = new Request("bed", "Berlin"))
+
+carrybuddy2.viewNearbyRequests("Berlin")
+carrybuddy2.viewNearbyRequests("Bllllln")
