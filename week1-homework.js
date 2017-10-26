@@ -65,16 +65,18 @@ class CarryBuddy{
 	}
 
 	receiveHelp(request) {
-		this.upcomingEvents.push(request)
+		this.upcomingEvents.push(request) // y u no working
 	//	this.request[0].buddyFound = true; extra
-		// remove from requests
-		function removedFromRequests(request) {
+		function removedFromRequests(request) { // Y U NO WORKING
 			return this.requests.request.itemName !== request;
 		}
 		console.log(removedFromRequests);
 
-		
-		//allOpenRequests.remove(request); above
+		function removedFromAllOpenRequests(request) { // Y U NO WORKING
+			return allOpenRequests.request.itemName !== request;
+		}
+		console.log(removedFromAllOpenRequests);		
+
 		this.receiveConfirmation();
 	}
 
@@ -149,3 +151,5 @@ carrybuddy1.publishRequest(couch)
 
 carrybuddy2.viewNearbyRequests("Berlin")
 carrybuddy2.viewNearbyRequests("Bllllln")
+
+carrybuddy2.offerHelp(carrybuddy1, bed)
