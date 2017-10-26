@@ -61,24 +61,32 @@ class CarryBuddy{
 
 	}
 
-	offerHelp(buddy, request) {
+	offerHelp(buddy, request) { // buddy2 = this 
 		this.upcomingEvents.push(request); // add check if request.budFound = true already
 		buddy.receiveHelp();
 		this.receiveConfirmation();
-		buddy.receiveConfirmation();
 	}
 
-	receiveHelp(buddy, request) {
+	receiveHelp(request) {
 		this.upcomingEvents.push(request)
-		this.request[0].buddyFound = true;
-		this.requests.remove(request);
-		allOpenRequests.remove(request);
+	//	this.request[0].buddyFound = true;
+		//this.requests.remove(request);
+		const removeRequestFromThis = this.requests.filter(function(el) {
+			return el.itemName !== request;
+			console.log(JSON.stringify(removeRequestFromThis, null, ' ')); //?
+		})
+		const removeRequestFromAllOpenRequests = this.allOpenRequests.filter(function(el) {
+			return el.itemName !== request;
+			console.log(JSON.stringify(removeRequestFromAllOpenRequests, null, ' ')); //?
+		})
+		//allOpenRequests.remove(request); above
+		this.receiveConfirmation();
 	}
 
 
-	receiveConfirmation(buddy, request){ // mssg to both parties?
+	receiveConfirmation(){ //
 		// get all info for item x 
-		console.log("Buddy X and X will meet at date, location to carry item X.");
+		console.log("You have an event coming up. Please check your upcoming events.");
 	}
 
 	writeReview(buddy, rating, comment){ // by monikks
@@ -135,8 +143,13 @@ console.log("++++++++++++++++++++++++++++++++++++++++++")
 carrybuddy1.viewNearbyBuddies("Berlin")
 carrybuddy1.viewNearbyBuddies("Bllllln")
 
-carrybuddy1.publishRequest(request1 = new Request("really big cupboard", "Berlin"))
-carrybuddy1.publishRequest(request1 = new Request("bed", "Berlin"))
+var bed = new Request("bed", "Berlin")
+var couch = new Request("couch", "Berlin")
+
+carrybuddy1.publishRequest(bed)
+carrybuddy2.publishRequest(couch)
+//carrybuddy1.publishRequest(request1 = new Request("really big cupboard", "Berlin"))
+//carrybuddy1.publishRequest(request1 = new Request("bed", "Berlin"))
 
 carrybuddy2.viewNearbyRequests("Berlin")
 carrybuddy2.viewNearbyRequests("Bllllln")
