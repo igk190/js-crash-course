@@ -36,10 +36,7 @@ class CarryBuddy{
 
 	viewNearbyBuddies(location){		
 		let nearbyBuddies = carrybuddies.filter(function(o) {
-			return o.location === location
-
-
-		
+			return o.location === location	
 		});
 
 		if (nearbyBuddies.length === 0) {
@@ -69,16 +66,14 @@ class CarryBuddy{
 
 	receiveHelp(request) {
 		this.upcomingEvents.push(request)
-	//	this.request[0].buddyFound = true;
-		//this.requests.remove(request);
-		const removeRequestFromThis = this.requests.filter(function(el) {
-			return el.itemName !== request;
-			console.log(JSON.stringify(removeRequestFromThis, null, ' ')); //?
-		})
-		const removeRequestFromAllOpenRequests = this.allOpenRequests.filter(function(el) {
-			return el.itemName !== request;
-			console.log(JSON.stringify(removeRequestFromAllOpenRequests, null, ' ')); //?
-		})
+	//	this.request[0].buddyFound = true; extra
+		// remove from requests
+		function removedFromRequests(request) {
+			return this.requests.request.itemName !== request;
+		}
+		console.log(removedFromRequests);
+
+		
 		//allOpenRequests.remove(request); above
 		this.receiveConfirmation();
 	}
@@ -86,6 +81,7 @@ class CarryBuddy{
 
 	receiveConfirmation(){ //
 		// get all info for item x 
+		console.log("Dear " + this.name + ',');
 		console.log("You have an event coming up. Please check your upcoming events.");
 	}
 
@@ -147,7 +143,7 @@ var bed = new Request("bed", "Berlin")
 var couch = new Request("couch", "Berlin")
 
 carrybuddy1.publishRequest(bed)
-carrybuddy2.publishRequest(couch)
+carrybuddy1.publishRequest(couch)
 //carrybuddy1.publishRequest(request1 = new Request("really big cupboard", "Berlin"))
 //carrybuddy1.publishRequest(request1 = new Request("bed", "Berlin"))
 
