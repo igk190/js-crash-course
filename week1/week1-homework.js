@@ -1,4 +1,4 @@
-let allOpenRequests = []; 
+let allRequests = []; 
 
 class CarryBuddy{
 	constructor(name, location, email, requests, upcomingEvents, ratings){
@@ -15,11 +15,12 @@ class CarryBuddy{
 
 	publishRequest(request){
 		this.requests.push(request);
-		allOpenRequests.push(request);
+		request.owner = this.name;
+		allRequests.push(request);
 	}
 
-	viewNearbyRequests(location){ // extra: look for multiple locations
-		let openRequestsByLocation = allOpenRequests.filter(function(loc) {
+	viewNearbyRequests(location){
+		let openRequestsByLocation = allRequests.filter(function(loc) {
 				return loc.location === location
 			});
 
@@ -28,9 +29,15 @@ class CarryBuddy{
 		}
 		else {
 			console.log("Here are the open requests in " + arguments[0] + ":");
-			console.log(openRequestsByLocation);
-		} // extra @ else:per request, return only item, location, name, date, time.
+			console.log(JSON.stringify(openRequestsByLocation));
+			console.log("end");
 
+			const x = openRequestsByLocation;
+			for (var i = 0, len = x.length; i < len; i++) {
+			    console.log("REQUEST "+ (i + 1) + ", item: " + x[i]["itemName"] + ", location: " + x[i]["location"] + ", ");
+                console.log(" owner" + x[i]["owner"] + "date" + x[i]["date"])
+			    } 
+		}
 	}
 
 	viewNearbyBuddies(location){		
@@ -45,51 +52,46 @@ class CarryBuddy{
 		else {
 			console.log("Here are all carry buddies in " + arguments[0] + ":");
 			console.log(nearbyBuddies);
-			
-			for (var singleProps in nearbyBuddies) {  // trying to access props of individual objects in nearbybuddies array..
-				Object.keys(singleProps).forEach(function(key) { // 0: 0
-					(console.log(key + ': ' + singleProps[key]));
-				})
-			} 
-		} 
-		// extra @ else: return only name, location, email, average rating per buddy
 
+
+			const y = nearbyBuddies;
+			for (var i = 0, len = y.length; i < len; i++) {
+			    console.log("BUDDY "+ (i + 1) + ", name: " + y[i]["name"] + ", location: " + y[i]["location"] + ", ");
+                console.log("email: " + y[i]["email"] + ", date: " + y[i]["date"])
+			    }
+		} 
 	}
 
 	offerHelp(buddy, request) {
 		this.upcomingEvents.push(request);
 		buddy.receiveHelp(request);
-		this.receiveConfirmation();
+		this.receiveConfirmation(request);
+
 	}
 
 	receiveHelp(request) {
 		this.upcomingEvents.push(request)
-	//	extra: set buddyFound to true
 
-
-		const removedFromRequests = this.requests.filter(function(reqs) {
-		    return reqs !== request;  //????????
+		const removedFromRequests = this.requests.filter(function(req) {
+		    return req !== request; 
 		});
 		this.requests = removedFromRequests;
 		console.log("THIS REQUESTS :: ", JSON.stringify(this.requests));
 
-		const removedFromAllOpenRequests = allOpenRequests.filter(function(req) {
-		    return req !== request;
+		const removedFromAllRequests = allRequests.filter(function(reqs) {
+		    return reqs !== request;
 		})
-		allOpenRequests = removedFromAllOpenRequests;
-		console.log("ALL OPEN REQUESTS::", JSON.stringify(allOpenRequests));
-		//function removedFromAllOpenRequests(request) { // NOT WORKING
-		//	return allOpenRequests.request.itemName !== request;
-		//}
+		allRequests = removedFromAllRequests;
+		console.log("ALL OPEN REQUESTS::", JSON.stringify(allRequests));
 		
-		this.receiveConfirmation();
+		this.receiveConfirmation(request);
 	}
 
 
-	receiveConfirmation(){ //
+	receiveConfirmation(request){ //
 		console.log("Dear " + this.name + ',');
 		console.log("You have an event coming up. Please check your upcoming events.");
-		// extra: get all info for item x. Dear x and X. you will be carrying X on Date at xx o clock. 
+		console.log("item to be transported: " + request.itemName + " on " + request.date + " at " + request.time); 
 	}
 
 	writeReview(request, buddy, rating, comment){ // by monikks
@@ -104,20 +106,16 @@ class CarryBuddy{
 		this.num += 1;
 		this.average_rating = this.sum/this.num;
 	}
-
-
-
 }
 
 class Request {
-	constructor(itemName,location, owner, date, time, buddyFound){
+	constructor(itemName,location, date, time, buddyFound, owner){
 		this.itemName = itemName;
 		this.location = location; 
-		this.owner = owner; // SET TO OWNER whos array it is pushed to
 		this.date = date;
 		this.time = time;
 		this.buddyFound = false;
-
+		//this.owner = owner;
 	}
 }
 
@@ -135,18 +133,19 @@ getCarryBuddyByName = name => carrybuddies.find(function(o){return o.name === na
 carrybuddy1 = new CarryBuddy("Gracia", "Berlin", "g@racia.com");
 carrybuddy2 = new CarryBuddy("Piet", "Berlin", "p@iet.com");
 carrybuddy3 = new CarryBuddy("Henk", "Stuttgart","h@enk.com");
-//carrybuddy4 = new CarryBuddy("Truus", "Frankfurt", "t@ruus.com")
+carrybuddy4 = new CarryBuddy("Truus", "Frankfurt", "t@ruus.com")
 
 carrybuddies.push(carrybuddy1);
 carrybuddies.push(carrybuddy2);
 carrybuddies.push(carrybuddy3);
+carrybuddies.push(carrybuddy4);
 
 
 console.log("++++++++++++++++++++++++++++++++++++++++++")
 carrybuddy1.viewNearbyBuddies("Berlin")
 carrybuddy1.viewNearbyBuddies("Bxxxxn")
 
-var bed = new Request("bed", "Berlin")
+var bed = new Request("bed", "Berlin", )
 var couch = new Request("couch", "Berlin")
 
 carrybuddy1.publishRequest(bed)
