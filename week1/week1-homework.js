@@ -1,6 +1,5 @@
 let allOpenRequests = []; 
 
-
 class CarryBuddy{
 	constructor(name, location, email, requests, upcomingEvents, ratings){
 		this.name = name;
@@ -19,18 +18,18 @@ class CarryBuddy{
 		allOpenRequests.push(request);
 	}
 
-	viewNearbyRequests(location){  // look for one location at a time
+	viewNearbyRequests(location){ // extra: look for multiple locations
 		let openRequestsByLocation = allOpenRequests.filter(function(loc) {
 				return loc.location === location
 			});
 
-		if (openRequestsByLocation.length === 0) { // not functioning atm.
+		if (openRequestsByLocation.length === 0) {
 			console.log("No open requests in this area right now.")
 		}
 		else {
 			console.log("Here are the open requests in " + arguments[0] + ":");
 			console.log(openRequestsByLocation);
-		} // extra @ else: return only item, location, name, date, time.
+		} // extra @ else:per request, return only item, location, name, date, time.
 
 	}
 
@@ -51,47 +50,52 @@ class CarryBuddy{
 				Object.keys(singleProps).forEach(function(key) { // 0: 0
 					(console.log(key + ': ' + singleProps[key]));
 				})
-			} // closing for loop
-
-		} // closing else
+			} 
+		} 
 		// extra @ else: return only name, location, email, average rating per buddy
 
 	}
 
-	offerHelp(buddy, request) { // buddy2 = this 
-		this.upcomingEvents.push(request); // add check if request.budFound = true already
-		buddy.receiveHelp();
+	offerHelp(buddy, request) {
+		this.upcomingEvents.push(request);
+		buddy.receiveHelp(request);
 		this.receiveConfirmation();
 	}
 
 	receiveHelp(request) {
-		this.upcomingEvents.push(request) // y u no working
-	//	this.request[0].buddyFound = true; extra
-		function removedFromRequests(request) { // Y U NO WORKING
-			return this.requests.request.itemName !== request;
-		}
-		console.log(removedFromRequests);
+		this.upcomingEvents.push(request)
+	//	extra: set buddyFound to true
 
-		function removedFromAllOpenRequests(request) { // Y U NO WORKING
-			return allOpenRequests.request.itemName !== request;
-		}
-		console.log(removedFromAllOpenRequests);		
 
+		const removedFromRequests = this.requests.filter(function(reqs) {
+		    return reqs !== request;  //????????
+		});
+		this.requests = removedFromRequests;
+		console.log("THIS REQUESTS :: ", JSON.stringify(this.requests));
+
+		const removedFromAllOpenRequests = allOpenRequests.filter(function(req) {
+		    return req !== request;
+		})
+		allOpenRequests = removedFromAllOpenRequests;
+		console.log("ALL OPEN REQUESTS::", JSON.stringify(allOpenRequests));
+		//function removedFromAllOpenRequests(request) { // NOT WORKING
+		//	return allOpenRequests.request.itemName !== request;
+		//}
+		
 		this.receiveConfirmation();
 	}
 
 
 	receiveConfirmation(){ //
-		// get all info for item x 
 		console.log("Dear " + this.name + ',');
 		console.log("You have an event coming up. Please check your upcoming events.");
+		// extra: get all info for item x. Dear x and X. you will be carrying X on Date at xx o clock. 
 	}
 
-	writeReview(buddy, rating, comment){ // by monikks
+	writeReview(request, buddy, rating, comment){ // by monikks
 		buddy.receiveReview(new Review(rating, comment, this))
-		this.upcomingEvents.remove(request);
-		buddy.upcomingEvents.remove(requests);
-		// args stimmen nicht at all
+		this.upcomingEvents.remove(request); // NOT WORKING
+		buddy.upcomingEvents.remove(requests); // check args
 	}
 
 	receiveReview(rating){ // by monikks
@@ -108,7 +112,7 @@ class CarryBuddy{
 class Request {
 	constructor(itemName,location, owner, date, time, buddyFound){
 		this.itemName = itemName;
-		this.location = location;  // do I need this?
+		this.location = location; 
 		this.owner = owner; // SET TO OWNER whos array it is pushed to
 		this.date = date;
 		this.time = time;
@@ -127,29 +131,30 @@ class Review {
 
 carrybuddies = [];
 getCarryBuddyByName = name => carrybuddies.find(function(o){return o.name === name;});
-getCarryBuddyByLocation = location => carr //// ?
 
 carrybuddy1 = new CarryBuddy("Gracia", "Berlin", "g@racia.com");
 carrybuddy2 = new CarryBuddy("Piet", "Berlin", "p@iet.com");
 carrybuddy3 = new CarryBuddy("Henk", "Stuttgart","h@enk.com");
+//carrybuddy4 = new CarryBuddy("Truus", "Frankfurt", "t@ruus.com")
 
 carrybuddies.push(carrybuddy1);
 carrybuddies.push(carrybuddy2);
 carrybuddies.push(carrybuddy3);
 
+
 console.log("++++++++++++++++++++++++++++++++++++++++++")
 carrybuddy1.viewNearbyBuddies("Berlin")
-carrybuddy1.viewNearbyBuddies("Bllllln")
+carrybuddy1.viewNearbyBuddies("Bxxxxn")
 
 var bed = new Request("bed", "Berlin")
 var couch = new Request("couch", "Berlin")
 
 carrybuddy1.publishRequest(bed)
 carrybuddy1.publishRequest(couch)
-//carrybuddy1.publishRequest(request1 = new Request("really big cupboard", "Berlin"))
-//carrybuddy1.publishRequest(request1 = new Request("bed", "Berlin"))
 
 carrybuddy2.viewNearbyRequests("Berlin")
-carrybuddy2.viewNearbyRequests("Bllllln")
+carrybuddy2.viewNearbyRequests("Bxxxxn")
 
 carrybuddy2.offerHelp(carrybuddy1, bed)
+console.log("carrybuddy1 requests & upcoming events:" + JSON.stringify(carrybuddy1.requests) + "//" + JSON.stringify(carrybuddy1.upcomingEvents))
+console.log("carrybuddy2:" + carrybuddy2.requests + "//" + carrybuddy2.upcomingEvents)
