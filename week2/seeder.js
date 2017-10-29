@@ -34,13 +34,11 @@ exports.seedDatabase = () => {
     
     carrybuddy2.viewNearbyRequests("Berlin")
     carrybuddy2.viewNearbyRequests("Bxxxxn")
-    carrybuddy4.viewNearbyRequests("Stuttgart")
-    
+    carrybuddy4.viewNearbyRequests("Stuttgart")  
     
     carrybuddy2.offerHelp(carrybuddy1, bed)
     console.log("carrybuddy1 requests & upcoming events:\n" + "reqs" + JSON.stringify(carrybuddy1.requests) + "\n//upcoming" + JSON.stringify(carrybuddy1.upcomingEvents))
     console.log("carrybuddy2 upcoming events:"  + "//" + JSON.stringify(carrybuddy2.upcomingEvents))
-    
     
     carrybuddy1 = getCarryBuddyByName("Gracia")
     carrybuddy2 = getCarryBuddyByName("Piet")

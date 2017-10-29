@@ -3,7 +3,6 @@ let carrybuddies = Database.carrybuddies;
 let allRequests = Database.allRequests;
 const Review = require('./review')
 
-
 module.exports = class CarryBuddy{
 	constructor(name, location, email, requests, upcomingEvents, ratings){
 		this.name = name;
@@ -50,7 +49,6 @@ module.exports = class CarryBuddy{
 		if (nearbyBuddies.length === 0) {
 			console.log("Sorry, no buddies to be found in " + location + ".");
 		}
-
 		else {
 			console.log("Here are all carry buddies in " + arguments[0] + ":");
 			//console.log(nearbyBuddies);
@@ -68,7 +66,6 @@ module.exports = class CarryBuddy{
 		this.upcomingEvents.push(request);
 		buddy.receiveHelp(request);
 		this.receiveConfirmation(request);
-
 	}
 
 	receiveHelp(request) {
@@ -89,7 +86,6 @@ module.exports = class CarryBuddy{
 		this.receiveConfirmation(request);
 	}
 
-
 	receiveConfirmation(request){ //
 		console.log("Dear " + this.name + ',');
 		console.log("You have an event coming up. Please check your upcoming events.");
@@ -103,7 +99,6 @@ module.exports = class CarryBuddy{
 		    return req !== request; 
 		});
 		this.upcomingEvents = removedFromUpcomingEvents;
-
 	}
 
 	receiveReview(rating){ // thanks monikks

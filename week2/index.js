@@ -1,12 +1,17 @@
-// Database.save(instructors)
 const fs = require('fs');
 const Seeder = require('./seeder')
+const Database = require('./database')
 
 function main() {
     let findBuddies = Seeder.seedDatabase();
     console.log(JSON.stringify(findBuddies))
-    fs.writeFile('myjsonfile.json', JSON.stringify(findBuddies), 'utf8', (err, result) => {
-        console.log('Written to file.')
-    })
+    
+    Database.save(findBuddies)
+    let loadedBuddies = Database.load()
+    console.log("READING LOADED FILE: ")
+    console.log(JSON.stringify(loadedBuddies))
 }
+
 main()
+
+

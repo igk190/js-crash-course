@@ -1,12 +1,12 @@
 const fs = require('fs');
 
-//exports.save = (people) => {
-//     fs.writeFileSync('./data.json', JSON.stringify(people));
-// }
+exports.save = (buddies) => {
+    fs.writeFileSync('./myjsonfile.json', JSON.stringify(buddies));
+}
 
-// exports.load = () => {
-//     return JSON.parse(fs.readFileSync('./data.json', 'utf8'));
-// }
+exports.load = () => {
+    return JSON.parse(fs.readFileSync('./myjsonfile.json', 'utf8'));
+}
 
 exports.allRequests = [];
 exports.carrybuddies = [];
