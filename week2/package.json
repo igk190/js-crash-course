@@ -1,0 +1,14 @@
+{
+  "name": "week2",
+  "version": "1.0.0",
+  "description": "Week 2 - Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gracia Kleijnen <graciakleijnen@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "ansi-red": "^0.1.1"
+  }
+}
