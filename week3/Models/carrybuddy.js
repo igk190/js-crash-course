@@ -1,8 +1,9 @@
 const Database = require('../Data/database')
-// let carrybuddies = Database.carrybuddies;
-// let allRequests = Database.allRequests;
 const Review = require('./review')
 const Request = require('./review')
+
+let carrybuddies = Database.carrybuddies;
+let allRequests = Database.allRequests;
 
 module.exports = class CarryBuddy{
 	constructor(name, location, email, requests, upcomingEvents, ratings){

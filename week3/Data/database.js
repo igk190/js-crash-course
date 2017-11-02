@@ -15,6 +15,12 @@ const chooseDataJson = {
     },
 }
 
+const carrybuddies = [];
+const allRequests = [];
+
+exports.carrybuddies = carrybuddies;
+exports.allRequests = allRequests;
+
 exports.save = (database, item) => {
     const name = chooseDataJson[database].name
     const file = chooseDataJson[database].file

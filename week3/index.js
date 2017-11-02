@@ -1,6 +1,6 @@
 const fs = require('fs');
 const Seeder = require('./seeder')
-const Database = require('./database')
+const Database = require('./Data/database')
 
 function main() {
     let findBuddies = Seeder.seedDatabase();

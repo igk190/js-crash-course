@@ -1,7 +1,7 @@
-const Database = require('./database')
-const CarryBuddy = require('./carrybuddy')
-const Request = require('./request')
-const Review = require('./review')
+const Database = require('./Data/database')
+const CarryBuddy = require('./Models/carrybuddy')
+const Request = require('./Models/request')
+const Review = require('./Models/review')
 
 exports.seedDatabase = () => {
     let carrybuddies = Database.carrybuddies;
