@@ -1,32 +1,29 @@
 const fs = require('fs');
 
-const chooseDataJson = {
-    CarryBuddy: {
-        name: 'CarryBuddy',
-        file: './Data/CarryBuddy_data.json'
-    },
-    Request: {
-        name: 'Request',
-        file: './Data/Request_data.json'
-    },
-    Review: {
-        name: 'Review',
-        file: './Data/Review_data.json'
-    },
+exports.save = (obj, modelName) => {
+    return new Promise((resolve, reject) => {
+        fs.writeFile(`${__dirname}/${modelName}.json`, JSON.stringify(obj), (err, contents) => {
+            if (err) {
+                reject('err');
+            }
+            resolve(contents);
+        });
+    });
 }
 
-exports.save = (database, item) => {
-    const name = chooseDataJson[database].name
-    const file = chooseDataJson[database].file
-
-    fs.writeFileSync(file, JSON.stringify({
-        [name]: item
-    }))
+exports.load = async (modelName) => {
+    let content = await readFile(`${__dirname}/${modelName}.json`);
+    return JSON.parse(content);
 }
 
-exports.load = (database) => {
-    const file = chooseDataJson[database].file
-    return JSON.parse(fs.readFileSync(file, 'utf8'));
-}
-
+const readFile = async (fileName) => {
+    return new Promise((resolve, reject) => {
+        fs.readFile(fileName, 'utf8', (err, contents) => {
+            if (err) {
+                reject('err');
+            }
+            resolve(contents);
+        });
+    });
+};
 

@@ -1,6 +1,6 @@
 const Database = require('../Data/database')
-// let carrybuddies = Database.carrybuddies;
-// let allRequests = Database.allRequests;
+// let carrybuddies = Database.carrybuddies; ?
+// let allRequests = Database.allRequests;  ?
 const Review = require('./review')
 const Request = require('./review')
 
@@ -29,7 +29,7 @@ module.exports = class CarryBuddy{
 							  obj.num)
 	}
 
-	publishRequest(request){
+	publishRequest(request) {
 		this.requests.push(request);
 		request.owner = this.name;
 		allRequests.push(request);
