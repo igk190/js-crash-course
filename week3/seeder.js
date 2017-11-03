@@ -6,8 +6,9 @@ const Review = require('./Models/review')
 exports.seedDatabase = () => {
     let carrybuddies = Database.carrybuddies;
     getCarryBuddyByName = name => carrybuddies.find(function(o){return o.name === name;});
-    let allRequests = Database.allRequests;
+    let allRequests = Database.allRequests;// this is elsewhere
     
+    // below should be with create
     carrybuddy1 = new CarryBuddy("Gracia", "Berlin", "g@racia.com");
     carrybuddy2 = new CarryBuddy("Piet", "Berlin", "p@iet.com");
     carrybuddy3 = new CarryBuddy("Henk", "Stuttgart","h@enk.com");
