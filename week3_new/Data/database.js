@@ -25,36 +25,16 @@ const readFile = async(name) => {
 }
 
 exports.load = async (name) => {
-    const content = await readFile(name);
-    return JSON.parse(content);
+    readFile(name)
+    .then((content) => {
+        console.log("\n"); 
+        console.log(content);
+    }).catch((err) => {
+        console.error(err);
+    });
 }
 
 exports.allRequests = [];
 exports.allCarryBuddies = [];
 exports.allReviews = [];
-
-// exports.load = (name) => {
-//     return JSON.parse(fs.readFileSync('./' + name + '.json', 'utf8'));
-// }
-
-// PromiseFunction = (name) => {
-//     return new Promise((resolve, reject) => {
-//         fs.readFile('./' + name + '.json', 'utf8', (err, contents) => {
-//             if(err) {
-//                  reject(err);
-//              } else {
-//                 resolve(contents);
-//              }
-
-//         })  
-        
-//     })
-//  } 
-
-//  exports.load = PromiseFunction {  // nein
-//  .then(function(result) {
-//     return result;
-// })
-
-
 

@@ -115,7 +115,7 @@ module.exports = class CarryBuddy{
 		this.upcomingEvents = removedFromUpcomingEvents;
 	}
 
-	receiveReview(rating){
+	receiveReview(rating){ 
 		this.ratings.push(rating);
 		this.sum = this.sum + rating.rating;  
 		this.num = this.num + 1;
