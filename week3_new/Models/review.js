@@ -8,9 +8,10 @@ module.exports = class Review {
 
 	static create(obj) {
 		return new Review(
-			obj.buddy,
+			obj.id,
 			obj.rating,
-			obj.comment
+			obj.comment,
+			obj.carrybuddyID
 		)
 	}
 }

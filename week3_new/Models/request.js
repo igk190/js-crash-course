@@ -13,7 +13,9 @@ module.exports = class Request {
 			obj.itemName,
 			obj.location,
 			obj.date,
-			obj.time
+			obj.time,
+			obj.id,
+			obj.carrybuddyID
 		)
 	}
 

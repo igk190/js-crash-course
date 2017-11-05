@@ -4,9 +4,11 @@ const Request = require('./Models/request')
 const Review = require('./Models/review')
 
 exports.seedDatabase = () => {
+    
     let allCarryBuddies = Database.allCarryBuddies;
     let allRequests = Database.allRequests;
     let allReviews = Database.allReviews;
+
     getCarryBuddyReviews = carrybuddyID => allReviews.find(function(o){return o.carrybuddyID === carrybuddyID;});    
     getCarryBuddyRequests = carrybuddyID => allRequests.find(function(o){return o.carrybuddyID === carrybuddyID;});
     
@@ -19,6 +21,7 @@ exports.seedDatabase = () => {
     allCarryBuddies.push(carrybuddy2);
     allCarryBuddies.push(carrybuddy3);
     allCarryBuddies.push(carrybuddy4);
+
     Database.save(allCarryBuddies, 'carrybuddies')
 
     var bed = new Request("bed", "Berlin", "12/11/2017", "14:00", 1, 1)
@@ -30,16 +33,19 @@ exports.seedDatabase = () => {
     allRequests.push(couch)
     allRequests.push(table)
     allRequests.push(fridge)
+
     Database.save(allRequests, 'requests')
     
     review1 = new Review(1, 2, 5, "Perfect help! Thanks bro")
     review2 = new Review(2, 2, 5, "ermargurd wow")
     review3 = new Review(3, 1, 5, "Yay!")
     review4 = new Review(4, 3, 5, "Lol.")
+
     allReviews.push(review1)
     allReviews.push(review2)
     allReviews.push(review3)
     allReviews.push(review4)
+
     Database.save(allReviews, 'reviews')
 
 }
