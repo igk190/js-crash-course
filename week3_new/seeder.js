@@ -16,13 +16,15 @@ exports.seedDatabase = () => {
     carrybuddy2 = new CarryBuddy("Piet", "Berlin", "p@iet.com", 2);
     carrybuddy3 = new CarryBuddy("Henk", "Stuttgart","h@enk.com", 3);
     carrybuddy4 = new CarryBuddy("Truus", "Stuttgart", "t@ruus.com", 4)
-    
+
     allCarryBuddies.push(carrybuddy1);
     allCarryBuddies.push(carrybuddy2);
     allCarryBuddies.push(carrybuddy3);
     allCarryBuddies.push(carrybuddy4);
 
     Database.save(allCarryBuddies, 'carrybuddies')
+
+    // carrybuddy1.viewNearbyBuddies('Berlin') // y u no work
 
     var bed = new Request("bed", "Berlin", "12/11/2017", "14:00", 1, 1)
     var couch = new Request("couch", "Berlin", "11/11/2017", "10:00", 2, 1)
@@ -35,6 +37,9 @@ exports.seedDatabase = () => {
     allRequests.push(fridge)
 
     Database.save(allRequests, 'requests')
+
+    carrybuddy1.viewNearbyRequests('Berlin')
+    carrybuddy2.viewNearbyRequests('Stuttgart')
     
     review1 = new Review(1, 2, 5, "Perfect help! Thanks bro")
     review2 = new Review(2, 2, 5, "ermargurd wow")

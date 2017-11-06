@@ -1,3 +1,6 @@
+const Database = require('../Data/database')
+const allRequests = Database.allRequests;
+
 module.exports = class Request {
 	constructor(itemName,location, date, time, id, carrybuddyID){
 		this.itemName = itemName;
@@ -5,7 +8,9 @@ module.exports = class Request {
 		this.date = date;
 		this.time = time;
 		this.id = id;
-	    this.carrybuddyID = carrybuddyID;
+		this.carrybuddyownerID = carrybuddyownerID;
+		this.carrybuddyhelperID = carrybuddyhelperID;
+		this.status = 'open'; // open, pending, closed
 	}
 
 	static create(obj) {
@@ -22,5 +27,7 @@ module.exports = class Request {
 	getRequestsByCarryBuddyID(id) {
 		getCarryBuddyRequests = carrybuddyID => allRequests.find(function(o){return o.carrybuddyID === carrybuddyID;});		
 	}
+	
+
 }
 

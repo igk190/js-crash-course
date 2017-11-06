@@ -4,12 +4,12 @@ let allRequests = Database.allRequests;
 const Review = require('../Models/review')
 
 module.exports = class CarryBuddy{
-	constructor(name, location, email, id, upcomingEvents, ratings){
+	constructor(name, location, email, id, ratings){
 		this.name = name;
 		this.location = location;
 		this.email = email;
 		this.id = id;		
-		this.upcomingEvents = [];
+		// this.upcomingEvents = [];
 		this.ratings = [];
 		this.average_rating = 0;
 		this.sum = 0;
@@ -46,7 +46,7 @@ module.exports = class CarryBuddy{
 		}
 		else {
 			console.log("Here are the open requests in " + arguments[0] + ":");
-			//console.log(JSON.stringify(openRequestsByLocation));
+
 			const x = openRequestsByLocation;
 			for (var i = 0, len = x.length; i < len; i++) {
 			    console.log("REQUEST "+ (i + 1) + ", item: " + x[i]["itemName"] + ", location: " +
@@ -64,8 +64,7 @@ module.exports = class CarryBuddy{
 			console.log("Sorry, no buddies to be found in " + location + ".");
 		}
 		else {
-			console.log("Here are all carry buddies in " + arguments[0] + ":");
-			//console.log(nearbyBuddies);
+			console.log("Here are all carry buddies in " + location + ":");
 
 
 			const y = nearbyBuddies;
@@ -76,19 +75,24 @@ module.exports = class CarryBuddy{
 		} 
 	}
 
-	offerHelp(buddy, request) {
-		this.upcomingEvents.push(request);
-		buddy.receiveHelp(request);
+	offerHelp(request) {
+		//this.carrybuddy finds 'bed' or whtvr and helps carrybud2 with request
+		// for request eg. 'bed', look in allRequests
+		//return carrybuddyownerID of request
+			// 		buddy.receiveHelp(request); --> use found id?
+		// in allcarrybuddies, find carrybuddy with id X. 
+		// in request bed , set carrybuddyhelper.id  of to this.id
+
 		this.receiveConfirmation(request);
 	}
 
-	receiveHelp(request) {
+	receiveHelp(requestid) {
 		this.upcomingEvents.push(request)
-
-		const removedFromRequests = this.requests.filter(function(req) {
-		    return req !== request; 
-		});
-		this.requests = removedFromRequests;
+// --> CHANGE StATUS to pending here? or @ 
+		// const removedFromRequests = this.requests.filter(function(req) {
+		//     return req !== request; 
+		// });
+		// this.requests = removedFromRequests;
 		//console.log("THIS REQUESTS :: ", JSON.stringify(this.requests));
 
 		const removedFromAllRequests = allRequests.filter(function(reqs) {
@@ -109,10 +113,10 @@ module.exports = class CarryBuddy{
 	writeReview(request, buddy, rating, comment){ 
 		buddy.receiveReview(new Review(this.name, rating, comment))
 		
-		const removedFromUpcomingEvents = this.upcomingEvents.filter(function(req) {
-		    return req !== request; 
-		});
-		this.upcomingEvents = removedFromUpcomingEvents;
+		// const removedFromUpcomingEvents = this.upcomingEvents.filter(function(req) {
+		//     return req !== request; 
+		// });  instead change status of request to closed
+		// this.upcomingEvents = removedFromUpcomingEvents;
 	}
 
 	receiveReview(rating){ 
