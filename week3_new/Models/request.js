@@ -24,9 +24,9 @@ module.exports = class Request {
 		)
 	}
 
-	getRequestsByCarryBuddyID(id) {
-		getCarryBuddyRequests = carrybuddyID => allRequests.find(function(o){return o.carrybuddyID === carrybuddyID;});		
-	}
+	// getRequestByRequestId(id) {
+	// 	return o.id === id;		
+	// }
 	
 
 }

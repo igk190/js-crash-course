@@ -7,8 +7,9 @@ function main() {
     Seeder.seedDatabase();
     
     let carrybuddies = Database.load('carrybuddies')
-    Database.load('requests')
-    Database.load('reviews')
+    let requests =  Database.load('requests')
+    let reviews = Database.load('reviews')
+    
 }
 
 main()

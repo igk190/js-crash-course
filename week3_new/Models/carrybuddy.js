@@ -2,6 +2,7 @@ const Database = require('../Data/database')
 let allCarryBuddies = Database.allCarryBuddies;
 let allRequests = Database.allRequests;
 const Review = require('../Models/review')
+const Request = require('../Models/Request')
 
 module.exports = class CarryBuddy{
 	constructor(name, location, email, id, ratings){
@@ -9,7 +10,6 @@ module.exports = class CarryBuddy{
 		this.location = location;
 		this.email = email;
 		this.id = id;		
-		// this.upcomingEvents = [];
 		this.ratings = [];
 		this.average_rating = 0;
 		this.sum = 0;
@@ -60,7 +60,6 @@ module.exports = class CarryBuddy{
 		else {
 			console.log("Here are all carry buddies in " + location + ":");
 
-
 			const y = nearbyBuddies;
 			for (var i = 0, len = y.length; i < len; i++) {
 			    console.log("BUDDY "+ (i + 1) + ", name: " + y[i]["name"] + ", location: " +
@@ -69,48 +68,41 @@ module.exports = class CarryBuddy{
 		} 
 	}
 
-	offerHelp(request) {
-		//this.carrybuddy finds 'bed' or whtvr and helps carrybud2 with request
-		// for request eg. 'bed', look in allRequests
+	 
+
+	offerHelp(requestid) {
+		//carrybuddy1.offerHelp(1)
+		console.log("yeauleau")
+
+		var request = allRequests.find((requestid) => {
+				return this.allRequests
+		})
+		request.status = "pending"; 
+		request.helper = this.id; 
+		return true;
+		
+		// set request.status to 'pending'
+		// in request bed , set carrybuddyhelper.id  of to this.id
+
 		//return carrybuddyownerID of request
 			// 		buddy.receiveHelp(request); --> use found id?
 		// in allcarrybuddies, find carrybuddy with id X. 
-		// in request bed , set carrybuddyhelper.id  of to this.id
 
-		this.receiveConfirmation(request);
+		//this.receiveConfirmation(request);
 	}
 
 	receiveHelp(requestid) {
-		this.upcomingEvents.push(request)
-// --> CHANGE StATUS to pending here? or @ 
-		// const removedFromRequests = this.requests.filter(function(req) {
-		//     return req !== request; 
-		// });
-		// this.requests = removedFromRequests;
-		//console.log("THIS REQUESTS :: ", JSON.stringify(this.requests));
-
-		const removedFromAllRequests = allRequests.filter(function(reqs) {
-		    return reqs !== request;
-		})
-		allRequests = removedFromAllRequests;
-		//console.log("ALL OPEN REQUESTS::", JSON.stringify(allRequests));
-		
-		this.receiveConfirmation(request);
+		this.receiveConfirmation(request); //?
 	}
 
-	receiveConfirmation(request){ //
-		console.log("Dear " + this.name + ',');
-		console.log("You have an event coming up. Please check your upcoming events.");
+	sendConfirmation(request){ //
+		console.log("Dear " + this.name + ',\n you have an event coming up.');
 		console.log("item to be transported: " + request.itemName + " on " + request.date + " at " + request.time); 
 	}
 
 	writeReview(request, buddy, rating, comment){ 
 		buddy.receiveReview(new Review(this.name, rating, comment))
-		
-		// const removedFromUpcomingEvents = this.upcomingEvents.filter(function(req) {
-		//     return req !== request; 
-		// });  instead change status of request to closed
-		// this.upcomingEvents = removedFromUpcomingEvents;
+		//change status of re
 	}
 
 	receiveReview(rating){ 
