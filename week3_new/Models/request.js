@@ -2,7 +2,7 @@ const Database = require('../Data/database')
 const allRequests = Database.allRequests;
 
 module.exports = class Request {
-	constructor(itemName,location, date, time, id, carrybuddyID){
+	constructor(itemName,location, date, time, id, carrybuddyownerID, carrybuddyhelperID){
 		this.itemName = itemName;
 		this.location = location; 
 		this.date = date;

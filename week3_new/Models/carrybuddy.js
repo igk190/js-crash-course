@@ -1,5 +1,5 @@
 const Database = require('../Data/database')
-let carrybuddies = Database.carrybuddies;
+let allCarryBuddies = Database.allCarryBuddies;
 let allRequests = Database.allRequests;
 const Review = require('../Models/review')
 
@@ -30,12 +30,6 @@ module.exports = class CarryBuddy{
 		)
 	}
 
-	// publishRequest(request){
-	// 	// this.requests.push(request);
-	// 	request.owner = this.name;
-	// 	allRequests.push(request);
-	// }
-
 	viewNearbyRequests(location){
 		let openRequestsByLocation = allRequests.filter(function(loc) {
 				return loc.location === location
@@ -45,19 +39,19 @@ module.exports = class CarryBuddy{
 			console.log("No open requests in " + location + " right now.")
 		}
 		else {
-			console.log("Here are the open requests in " + arguments[0] + ":");
+			console.log("Here are the open requests in " + location + ":");
 
 			const x = openRequestsByLocation;
 			for (var i = 0, len = x.length; i < len; i++) {
-			    console.log("REQUEST "+ (i + 1) + ", item: " + x[i]["itemName"] + ", location: " +
-			     x[i]["location"] + ", owner: " + x[i]["owner"] + ", date: " + x[i]["date"] + ", time: " + x[i]["time"])
+			    console.log("REQUEST "+ (i + 1) + ",\n\titem: " + x[i]["itemName"] + ",\n\tlocation: " +
+			     x[i]["location"] + ",\n\tdate: " + x[i]["date"] + ",\n\ttime: " + x[i]["time"] + ",\n\tID: " + x[i]["id"])
 			    } 
 		}
 	}
 
 	viewNearbyBuddies(location){		
-		let nearbyBuddies = carrybuddies.filter(function(o) {
-			return o.location === location	
+		const nearbyBuddies = allCarryBuddies.filter(function(o) {
+			return o.location === location				
 		});
 
 		if (nearbyBuddies.length === 0) {
