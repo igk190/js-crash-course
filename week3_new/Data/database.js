@@ -4,7 +4,7 @@ const fs = require('fs');
 // }
 exports.save = async (data, name) => {
     return new Promise((resolve, reject) => {
-        fs.writeFile('./' + name + '.json', JSON.stringify(data), (err, content) => {
+        fs.writeFile('./Data/' + name + '.json', JSON.stringify(data), (err, content) => {
             if (err) {
                 reject(err);
             }
@@ -15,7 +15,7 @@ exports.save = async (data, name) => {
 
 const readFile = async(name) => {
     return new Promise((resolve, reject) => {
-        fs.readFile('./' + name + '.json', 'utf8', (err, content) => {
+        fs.readFile('./Data/' + name + '.json', 'utf8', (err, content) => {
             if (err) {
                 reject(err);
             }

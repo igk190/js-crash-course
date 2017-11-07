@@ -91,9 +91,13 @@ module.exports = class CarryBuddy{
 	// 	//console.log("item to be transported: " + request.itemName + " on " + request.date + " at " + request.time); 
 	// }
 
-	writeReview(requestID, buddyID, rating, comment){ 
-		buddy.receiveReview(new Review(this.name, rating, comment))
-		request.status = 'closed';	 // where?
+	writeReview(buddyByID, rating, comment){ 
+		const BuddyToReceiveReview = allCarryBuddies.find(function(obj) {
+			return obj.id === buddyByID;
+		});
+		console.log("BUDDY TO RECEIVE REVIEW :", BuddyToReceiveReview); // y u undefined
+		BuddyToReceiveReview.receiveReview(new Review(6, BuddyToReceiveReview.id, rating, comment)) // y u no work
+		// request.status = 'closed';	 // where?
 	}
 
 	receiveReview(rating){ 
