@@ -68,32 +68,23 @@ module.exports = class CarryBuddy{
 		} 
 	}
 
-	 
+	offerHelp(requestID) {
 
-	offerHelp(requestid) {
-		//carrybuddy1.offerHelp(1)
-		console.log("yeauleau")
-
-		var request = allRequests.find((requestid) => {
-				return this.allRequests
-		})
-		request.status = "pending"; 
-		request.helper = this.id; 
-		return true;
+		var returnedRequest = allRequests.find(function(obj) {
+			return obj.id === requestID;
+		});
 		
-		// set request.status to 'pending'
-		// in request bed , set carrybuddyhelper.id  of to this.id
-
-		//return carrybuddyownerID of request
-			// 		buddy.receiveHelp(request); --> use found id?
-		// in allcarrybuddies, find carrybuddy with id X. 
+		if (returnedRequest.status === 'open') {
+			returnedRequest.status = "pending"; 
+			returnedRequest.carrybuddyhelperID = this.id;
+			console.log(JSON.stringify(returnedRequest))
+		} else {
+			console.log("Another hero buddy is already helping! No help needed here. But thank you!")
+		}
 
 		//this.receiveConfirmation(request);
 	}
 
-	receiveHelp(requestid) {
-		this.receiveConfirmation(request); //?
-	}
 
 	sendConfirmation(request){ //
 		console.log("Dear " + this.name + ',\n you have an event coming up.');
@@ -102,7 +93,7 @@ module.exports = class CarryBuddy{
 
 	writeReview(request, buddy, rating, comment){ 
 		buddy.receiveReview(new Review(this.name, rating, comment))
-		//change status of re
+		//change status of request after writeReview
 	}
 
 	receiveReview(rating){ 

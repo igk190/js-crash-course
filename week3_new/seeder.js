@@ -42,8 +42,7 @@ exports.seedDatabase = () => {
     carrybuddy1.viewNearbyRequests('Berlin')
     carrybuddy2.viewNearbyRequests('Stuttgart')
 
-    // CARRYBUDDY.OFFERHELP()
-    //carrybuddy1.offerHelp(1);
+    carrybuddy1.offerHelp(1);
 
     
     review1 = new Review(1, 2, 5, "Perfect help! Thanks bro")
