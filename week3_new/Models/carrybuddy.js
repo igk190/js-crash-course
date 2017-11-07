@@ -81,19 +81,19 @@ module.exports = class CarryBuddy{
 		} else {
 			console.log("Another hero buddy is already helping! No help needed here. But thank you!")
 		}
-
-		//this.receiveConfirmation(request);
+		// this.sendConfirmation(requestID); //?
 	}
 
+	// EXTRA:sendConfirmation(requestID){ 
+	// 	 use requestID to get carrybuddyowner and helper id's. Find both in
+	// 	// allcarrybuddies. save to new array. foreach in array, send message:
+	// 	//console.log("Dear " + this.name + ',\n you have an event coming up.');
+	// 	//console.log("item to be transported: " + request.itemName + " on " + request.date + " at " + request.time); 
+	// }
 
-	sendConfirmation(request){ //
-		console.log("Dear " + this.name + ',\n you have an event coming up.');
-		console.log("item to be transported: " + request.itemName + " on " + request.date + " at " + request.time); 
-	}
-
-	writeReview(request, buddy, rating, comment){ 
+	writeReview(requestID, buddyID, rating, comment){ 
 		buddy.receiveReview(new Review(this.name, rating, comment))
-		//change status of request after writeReview
+		request.status = 'closed';	 // where?
 	}
 
 	receiveReview(rating){ 

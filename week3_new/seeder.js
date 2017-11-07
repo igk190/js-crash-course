@@ -27,8 +27,8 @@ exports.seedDatabase = () => {
     console.log("LOGGING NEARBY BUDDIES") // next thing no working
     carrybuddy1.viewNearbyBuddies('Berlin') 
 
-    var bed = new Request("bed", "Berlin", "12/11/2017", "14:00", 1, 1, )
-    var couch = new Request("couch", "Berlin", "11/11/2017", "10:00", 2, 1)
+    var bed = new Request("bed", "Berlin", "12/11/2017", "14:00", 1, 1)
+    var couch = new Request("couch", "Berlin", "11/11/2017", "10:00", 2, 2)
     var table = new Request("table", "Stuttgart", "09/11/2017", "09:00", 3, 3)
     var fridge = new Request("fridge", "Stuttgart", "09/11/2017", "15:00", 4, 3)
     
@@ -42,8 +42,8 @@ exports.seedDatabase = () => {
     carrybuddy1.viewNearbyRequests('Berlin')
     carrybuddy2.viewNearbyRequests('Stuttgart')
 
-    carrybuddy1.offerHelp(1);
-
+    carrybuddy1.offerHelp(2);
+    carrybuddy3.offerHelp(4);
     
     review1 = new Review(1, 2, 5, "Perfect help! Thanks bro")
     review2 = new Review(2, 2, 5, "ermargurd wow")
@@ -54,6 +54,8 @@ exports.seedDatabase = () => {
     allReviews.push(review2)
     allReviews.push(review3)
     allReviews.push(review4)
+
+    
 
     Database.save(allReviews, 'reviews')
 

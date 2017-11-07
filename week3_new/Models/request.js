@@ -23,10 +23,6 @@ module.exports = class Request {
 			obj.carrybuddyID
 		)
 	}
-
-	// getRequestByRequestId(id) {
-	// 	return o.id === id;		
-	// }
 	
 
 }
