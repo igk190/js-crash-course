@@ -92,12 +92,13 @@ module.exports = class CarryBuddy{
 	// }
 
 	writeReview(buddyByID, rating, comment){ 
+		var newID = Math.random() * 20; // ?
+
 		const BuddyToReceiveReview = allCarryBuddies.find(function(obj) {
 			return obj.id === buddyByID;
 		});
 		console.log("BUDDY TO RECEIVE REVIEW :", BuddyToReceiveReview); // y u undefined
-		BuddyToReceiveReview.receiveReview(new Review(6, BuddyToReceiveReview.id, rating, comment)) // y u no work
-		// request.status = 'closed';	 // where?
+		BuddyToReceiveReview.receiveReview(new Review(newID, BuddyToReceiveReview.id, rating, comment)) // y u no work
 	}
 
 	receiveReview(rating){ 
@@ -105,6 +106,10 @@ module.exports = class CarryBuddy{
 		this.sum = this.sum + rating.rating;  
 		this.num = this.num + 1;
 		this.average_rating = this.sum/this.num;
+	}
+
+	deactivateRequest(itemName) {
+		itemName.status = 'closed';
 	}
 }
 

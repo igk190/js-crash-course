@@ -50,16 +50,18 @@ exports.seedDatabase = () => {
     review3 = new Review(3, 1, 5, "Yay!")
     review4 = new Review(4, 3, 5, "Lol.")
 
-   // carrybuddy2.writeReview(5, 1, 5, "Great help.") // y u no work
-    //console.log(JSON.stringify(carrybuddy1));
+    carrybuddy2.writeReview(1, 5, "Great help.")
+    console.log("CARRYBUDDY WHO JUST GOT A REVIEW: ")
+    console.log(JSON.stringify(carrybuddy1));
+    carrybuddy1.writeReview(2, 5, "Totally cool. Anytime again.")
+    carrybuddy2.deactivateRequest(couch);
+    console.log(couch)
 
     allReviews.push(review1)
     allReviews.push(review2)
     allReviews.push(review3)
     allReviews.push(review4)
-
-
-
+    
     Database.save(allReviews, 'reviews')
 
 }
