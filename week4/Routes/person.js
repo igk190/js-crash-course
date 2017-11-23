@@ -10,13 +10,18 @@ router.get('/', async (req, res, next) => {
 router.get('/all', async (req, res, next) => {
     const people = await PersonService.findAll()
     res.render('person-list', {people})
-    // res.send(people)
 })
 
 router.get('/:id', async (req, res, next) => {
     const person = await PersonService.find(req.params.id)
 
     res.render('person-detail', {person})
+})
+
+//test
+router.get('/all/:location', async (req, res, next) => {
+    const peopleByLocation = await PersonService.findByLocation(req.params.location)
+    res.render('people-by-location', {peopleByLocation})
 })
 
 router.post('/', async (req, res, next) => {
