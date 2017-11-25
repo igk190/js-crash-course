@@ -14,12 +14,14 @@ async function del(id) {
     return PersonModel.remove({ id })
 }
 
-async function find(personID) {
-    return PersonModel.findOne({ id: personID }) 
+async function find(id) {
+    return PersonModel.findOne({ id }) // .populate(friends)
 } 
 
 async function findByLocation(location) {
-    return PersonModel.find({ location: location })
+    var auxLocation = location[0].toUpperCase() + location.slice(1);
+    const peopleByLocation = PersonModel.find({ 'location': auxLocation })
+    return peopleByLocation
 }
 
 module.exports = {

@@ -14,20 +14,23 @@ const RequestSchema = mongoose.Schema({
     date: {
         type: Date,
         required: true,
+        default: Date.now,
     },
     status: {
         type: String,
-        default: "open"
+        default: "open" // pending, closed
     },
     ownerID: {
-        type: Number,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Person',
         required: true,
     },
     helperID: {
-        type: Number
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Person',
     }
     
 });
-PersonSchema.plugin(AutoIncrement, { inc_field: 'id' })
+RequestSchema.plugin(AutoIncrement, { inc_field: 'requestId' })
 
-module.exports = mongoose.model('Person', PersonSchema)
+module.exports = mongoose.model('Request', RequestSchema)

@@ -36,4 +36,14 @@ router.delete('/:id', async (req, res, next) => {
     res.send('ok!')
 })
 
+// router.post('/:personID/friends', async (req, res, next) => {
+//     const person = await PersonService.find(req.params.personID)
+//     const target = await PersonService.find(req.body.targetID)
+
+//     person.friends.push(target)
+//     await updatedPerson = await person.save()
+//     res.send(updatedPerson)
+// })
+
+
 module.exports = router

@@ -18,9 +18,14 @@ router.get('/:id', async (req, res, next) => {
     res.render('request-detail', {request})
 })
 
+router.get('/all/:location', async (req, res, next) => {
+    const requestsByLocation = await RequestService.findByLocation(req.params.location)
+    res.render('requests-by-location', {requestsByLocation})
+})
+
 router.post('/', async (req, res, next) => {
     const request = await RequestService.add(req.body)
-
+    console.log(req)
     res.send(request)
 })
 

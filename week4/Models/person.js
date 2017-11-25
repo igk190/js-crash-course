@@ -14,6 +14,7 @@ const PersonSchema = mongoose.Schema({
     location: {
         type: String,
         required: true,
+        lowercase: true
     },
     
 });
