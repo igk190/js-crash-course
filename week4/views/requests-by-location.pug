@@ -3,5 +3,5 @@ extends layout
 block content
     h1 All requests by location: 
     for request in requestsByLocation
-        p name: #{request.itemName}, location: #{request.location} 
+        p name: #{request.itemName}, location: #{request.location} , ownerid: #{request.ownerId}
         //- br

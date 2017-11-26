@@ -6,7 +6,7 @@ async function findAll() {
     return RequestModel.find()     
 }
 
-async function add(person) {
+async function add(request) {
     return RequestModel.create(request)
 } 
 
@@ -14,8 +14,8 @@ async function del(id) {
     return RequestModel.remove({ id })
 }
 
-async function find(id) {
-    return RequestModel.findOne({ id }) // .populate(friends)
+async function find(requestId) {
+    return RequestModel.findOne({ requestId }) // .populate(friends)
 } 
 
 async function findByLocation(location) {

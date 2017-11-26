@@ -1,6 +1,41 @@
+//- extends layout
+
+//- block content
+//-     h1 Here's all requests:
+//-     each request in requests
+//-         p #{request}
+
+
+//- extends layout
+
+//- block content
+//-     h1 Here's people:
+//-     each person in people
+//-         p #{person}
+
+
 extends layout
 
 block content
-    h1 Here's all requests:
-    each request in requests
-        p #{request}
+    h1 Hello!
+    if requests.length
+        p Here are the requests:
+        table
+            thead
+                td ID
+                td Name
+                td Location
+            each request in requests
+                tr
+                    td #{request.id}
+                    td #{request.itemName}
+                    td #{request.location}
+
+        pre= JSON.stringify(requests, null, 2)
+    else
+        p There's no requests here yet :(
+    script.
+        console.log(!{JSON.stringify(requests)})
+
+
+

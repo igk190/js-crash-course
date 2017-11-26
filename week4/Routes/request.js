@@ -1,5 +1,7 @@
 const express = require('express')
 const router = express.Router()
+const PersonService = require('../services/person-service')
+
 
 const RequestService = require('../services/request-service')
 
@@ -12,10 +14,10 @@ router.get('/all', async (req, res, next) => {
     res.render('request-list', {requests})
 })
 
-router.get('/:id', async (req, res, next) => {
-    const request = await RequestService.find(req.params.id)
+router.get('/:requestId', async (req, res, next) => {
+    const request = await RequestService.find(req.params.requestId)
 
-    res.render('request-detail', {request})
+    res.render('request-detail', {requestId})
 })
 
 router.get('/all/:location', async (req, res, next) => {
@@ -23,9 +25,11 @@ router.get('/all/:location', async (req, res, next) => {
     res.render('requests-by-location', {requestsByLocation})
 })
 
+//check from here
 router.post('/', async (req, res, next) => {
+    const personID = await PersonService.findOne( requestId)
+    console.log(personID)
     const request = await RequestService.add(req.body)
-    console.log(req)
     res.send(request)
 })
 

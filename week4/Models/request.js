@@ -20,12 +20,11 @@ const RequestSchema = mongoose.Schema({
         type: String,
         default: "open" // pending, closed
     },
-    ownerID: {
+    ownerId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Person',
-        required: true,
     },
-    helperID: {
+    helperId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Person',
     }
