@@ -18,6 +18,7 @@ async function find(id) {
     return PersonModel.findOne({ id }) // .populate(friends)
 } 
 
+
 async function findByLocation(location) {
     var auxLocation = location[0].toUpperCase() + location.slice(1);
     const peopleByLocation = PersonModel.find({ 'location': auxLocation })
