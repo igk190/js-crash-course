@@ -18,6 +18,6 @@ const PersonSchema = mongoose.Schema({
     },
     
 });
-PersonSchema.plugin(AutoIncrement, { inc_field: 'id' })
+PersonSchema.plugin(AutoIncrement, {id: 'person', inc_field: 'id' })
 
 module.exports = mongoose.model('Person', PersonSchema)

@@ -20,7 +20,7 @@ async function find(id) {
 
 
 async function findByLocation(location) {
-    var auxLocation = location[0].toUpperCase() + location.slice(1);
+    var auxLocation = location.toLowerCase();
     const peopleByLocation = PersonModel.find({ 'location': auxLocation })
     return peopleByLocation
 }

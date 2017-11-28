@@ -30,6 +30,6 @@ const RequestSchema = mongoose.Schema({
     }
     
 });
-RequestSchema.plugin(AutoIncrement, { inc_field: 'requestId' })
+RequestSchema.plugin(AutoIncrement, { id: 'request', inc_field: 'id' })
 
 module.exports = mongoose.model('Request', RequestSchema)

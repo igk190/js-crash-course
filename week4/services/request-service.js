@@ -18,7 +18,7 @@ async function findAll() {
 //     return RequestQuery
 // } 
 async function add(request) {
-    const newOwnerId = PersonModel.findOne({ "id": request.ownerId })
+    const newOwnerId = await PersonModel.findOne({ "id": request.ownerId })
     request.ownerId = newOwnerId._id
     return RequestModel.create(request)
 }
@@ -27,8 +27,8 @@ async function del(requestId) {
     return RequestModel.remove({ requestId })
 }
 
-async function find(id) {  // should this be requestId?
-    return RequestModel.findOne({ id }) // .populate(friends)
+async function find(id) {  
+    return RequestModel.findOne({ id }).populate('ownerId')
 } 
 
 async function findByLocation(location) {

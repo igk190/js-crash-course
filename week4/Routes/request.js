@@ -14,8 +14,8 @@ router.get('/all', async (req, res, next) => {
     res.render('request-list', {requests})
 })
 
-router.get('/:requestId', async (req, res, next) => {
-    const request = await RequestService.find(req.params.requestId)
+router.get('/:id', async (req, res, next) => {
+    const request = await RequestService.find(req.params.id)
     res.render('request-detail', {request})
 })
 
