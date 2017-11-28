@@ -18,7 +18,6 @@ async function findAll() {
 //     return RequestQuery
 // } 
 async function add(request) {
-    
     const newOwnerId = PersonModel.findOne({ "id": request.ownerId })
     request.ownerId = newOwnerId._id
     return RequestModel.create(request)

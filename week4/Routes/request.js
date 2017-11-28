@@ -16,7 +16,6 @@ router.get('/all', async (req, res, next) => {
 
 router.get('/:requestId', async (req, res, next) => {
     const request = await RequestService.find(req.params.requestId)
-   
     res.render('request-detail', {request})
 })
 
