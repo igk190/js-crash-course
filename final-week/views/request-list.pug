@@ -1,0 +1,27 @@
+extends layout
+
+block content
+    h1 Hello!
+    if requests.length
+        p Here are the requests:
+        table
+            thead
+                td ID
+                td Name
+                td Location
+            each request in requests
+                tr
+                    td #{request.id}
+                    td 
+                        a(href='/request/requestid/' + request.id) #{request.itemName}
+                    td #{request.location}
+                    
+                   
+        pre= JSON.stringify(requests, null, 2)
+    else
+        p There's no requests here yet :(
+    script.
+        console.log(!{JSON.stringify(requests)})
+
+
+

@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    h1 The list of #{carrybuddies.length } the carrybuddies in the world
+    p #{carrybuddies[0].name}
+    p #{carrybuddies.map(person => person.name)}
+
+    each CarryBuddy in carrybuddies
+        p #{carrybuddies.name}
+        strong #{carrybuddy}

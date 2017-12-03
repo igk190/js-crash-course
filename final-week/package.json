@@ -1,0 +1,21 @@
+{
+  "name": "week4",
+  "version": "1.0.0",
+  "description": "Week 4 - Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gracia Kleijnen <graciakleijnen@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "ansi-red": "^0.1.1",
+    "axios": "^0.17.1",
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.2",
+    "mongoose": "^4.13.4",
+    "mongoose-sequence": "^4.0.1",
+    "pug": "^2.0.0-rc.4"
+  }
+}

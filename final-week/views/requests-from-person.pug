@@ -1,0 +1,6 @@
+extends layout
+
+block content
+    h1 All requests from this person: 
+    for request in allRequestsFromPersonXx
+        p name: #{request.itemName}, location: #{request.location} , ownerid: #{request.ownerId}
