@@ -33,8 +33,17 @@ async function find(id) {
 
 async function findByLocation(location) {
     var auxLocation = location[0].toUpperCase() + location.slice(1);
-    const requestsByLocation = RequestModel.find({ 'location': auxLocation })
+    const requestsByLocation = RequestModel.find({ 'location': auxLocation }).populate('ownerId')
     return requestsByLocation
+}
+
+// async function findAllRequestsFromPersonXxByID(ownerId) {
+//     return RequestModel.find({ ownerId}).populate('ownerId');
+// }
+async function findAllRequestsFromPersonXxByID(ownerId) {
+    const newOwnerId = await PersonModel.findOne({ "id": ownerId })
+    const id = newOwnerId._id
+    return RequestModel.find({ 'ownerId': id}).populate('ownerId');
 }
 
 module.exports = {
@@ -42,5 +51,6 @@ module.exports = {
     find,
     findByLocation,
     add,
-    del
+    del,
+    findAllRequestsFromPersonXxByID
 }

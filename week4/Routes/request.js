@@ -14,20 +14,23 @@ router.get('/all', async (req, res, next) => {
     res.render('request-list', {requests})
 })
 
-router.get('/:id', async (req, res, next) => {
+router.get('/requestid/:id', async (req, res, next) => {
     const request = await RequestService.find(req.params.id)
+    console.log("TEST REQUEST ROUTES" + request)
     res.render('request-detail', {request})
 })
+
+
 
 router.get('/all/:location', async (req, res, next) => {
     const requestsByLocation = await RequestService.findByLocation(req.params.location)
     res.render('requests-by-location', {requestsByLocation})
 })
 
-// router.post('/', async (req, res, next) => {
-//     const person = await PersonService.add(req.body)
-//     res.send(person)
-// })
+router.get('/owner/:ownerId', async (req, res, next) => {
+    const allRequestsFromPersonXx = await RequestService.findAllRequestsFromPersonXxByID(req.params.ownerId)
+    res.render('requests-from-person', {allRequestsFromPersonXx}) // Y U NO WORK
+})
 
 router.post('/', async (req, res, next) => {
     const request = await RequestService.add(req.body)
@@ -42,7 +45,6 @@ router.post('/', async (req, res, next) => {
 //     target.friends.addToSet(person)
 //     await target.save()
 //     const updatedPerson = await person.save()
-    
 
     // person.friends.push(target) // then save back to db
     // res.send(updatedPerson)

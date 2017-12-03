@@ -2,4 +2,11 @@ extends layout
 
 block content
     h1 Here are your request details!
-    p #{request}
+    if request
+        p Item name: #{request.itemName}
+        p Location: #{request.location}
+        p Owner ID: #{request.ownerId}
+        p Request status: #{request.status}
+    else
+        p Oh no! There's no request under this ID :O 
+
