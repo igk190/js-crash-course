@@ -15,7 +15,7 @@ async function del(id) {
 }
 
 async function find(id) {
-    return PersonModel.findOne({ id }) // .populate(friends)
+    return PersonModel.findOne({ id }) 
 } 
 
 

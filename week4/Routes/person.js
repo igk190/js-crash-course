@@ -18,7 +18,7 @@ router.get('/:id', async (req, res, next) => {
     res.render('person-detail', {person})
 })
 
-//test
+
 router.get('/all/:location', async (req, res, next) => {
     const peopleByLocation = await PersonService.findByLocation(req.params.location)
     res.render('people-by-location', {peopleByLocation})
@@ -29,6 +29,12 @@ router.post('/', async (req, res, next) => {
     res.send(person)
 })
 
+// NEW with form
+router.get('/', async (req, res, next) => {
+    // const testFormInput = await PersonService.findByLocation(req.body.location)
+    // res.render('people-by-location',testFormInput)
+    console.log(req)
+})
 
 router.delete('/:id', async (req, res, next) => {
     await PersonService.del(req.params.id)

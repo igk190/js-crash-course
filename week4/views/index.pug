@@ -1,5 +1,12 @@
 extends layout
 
 block content
-    h1 Hello!
+    h1 Find your Carry Buddy now!
+
+    form(name="find-carry-buddies", method="post", action="/person/post")
+        .input
+            span.label Location
+            input(type="text", name="location")
+        .actions
+            input(type="submit", value="submit")
 

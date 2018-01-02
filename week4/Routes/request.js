@@ -21,7 +21,6 @@ router.get('/requestid/:id', async (req, res, next) => {
 })
 
 
-
 router.get('/all/:location', async (req, res, next) => {
     const requestsByLocation = await RequestService.findByLocation(req.params.location)
     res.render('requests-by-location', {requestsByLocation})
@@ -37,18 +36,6 @@ router.post('/', async (req, res, next) => {
     res.send(request)
 })
 
-// router.post('/:personId/friends', async(req, res, next) => {
-//     const person = await PersonService.find(req.params.personId);
-//     const target = await PersonService.find(req.body.targetId)
-
-//     person.friends.addToSet(target) // instead of push
-//     target.friends.addToSet(person)
-//     await target.save()
-//     const updatedPerson = await person.save()
-
-    // person.friends.push(target) // then save back to db
-    // res.send(updatedPerson)
-// }) 
 
 router.delete('/:id', async (req, res, next) => {
     await RequestService.del(req.params.id)
