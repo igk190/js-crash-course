@@ -41,27 +41,26 @@ Database.save(lunches, "lunches", (err) => {
 });
 
 const main = async () => {
-    const contents1 = await Database.loadFile("users");
-    console.log(contents1)
-    console.log("THOSE WERE CONTENTS 1 !")
+    const loadedUsers = await Database.loadFile("users");
+    console.log(red("loaded users: "), loadedUsers)
+
+    const loadedLunches = await Database.loadFile("lunches");
+    console.log(red("loaded lunches: "), loadedLunches)
+    
+    const parsedUsers = JSON.parse(loadedUsers) 
+    const firstPerson = User.create(parsedUsers[0]);
+    console.log("Hello I am: ")
+    firstPerson.sayName();
 }
+
 main()
-// const loadedUsers = Database.loadUsers();
 
-// console.log(red("loaded users: "), loadedUsers);
 
-// const convertedUsers = loadedUsers.map(User.create);
-// convertedUsers[0].sayName();
 // const firstPerson = User.create(loadedUsers[0].name, loadedUsers[0].email);
 
 // firstPerson.sayName();
 // const secondPerson = User.create(loadedUsers[1]);
 // secondPerson.sayName();
-
-// Database.saveLunches(lunches) 
-// const loadedLunches = Database.loadLunches();
-// console.log(red("loaded lunches: "), loadedLunches);
-
 
 // console.log(loadedLunches[0]);
 // user1.sayName();

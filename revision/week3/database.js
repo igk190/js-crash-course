@@ -10,8 +10,7 @@ cb);
 }, 500);
 }
 
-
-exports.loadFile = async (filename) => {
+exports.loadFile = (filename) => {
     return new Promise((resolve, reject) => {
         fs.readFile(`./data/${filename}.json`, 'utf8', (err, contents) => {
             if (err) return reject(err);
@@ -19,8 +18,6 @@ exports.loadFile = async (filename) => {
         });
     });
 }
-
-
 
 exports.users = [];
 exports.lunches = [];
