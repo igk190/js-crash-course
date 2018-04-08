@@ -1,0 +1,23 @@
+extends layout
+
+block content
+    h1 The list of #{lunches.length} the lunches in the world
+    if lunches.length 
+        p Here they are:
+        table
+            thead
+                td ID
+                td Location
+                td Date
+            each lunch in lunches
+                tr
+                    td #{lunch.lunchId}
+                    td #{lunch.location}
+                    td #{lunch.date}
+        
+        pre= JSON.stringify(lunches, null, 2)
+    else
+        p No one is hungry yet =(
+    script.
+        console.log(!{JSON.stringify(users)})
+        

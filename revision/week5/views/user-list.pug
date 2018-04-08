@@ -1,0 +1,23 @@
+extends layout
+
+block content
+    h1 The list of #{users.length} the people in the world
+    if users.length 
+        p Here is everyone:
+        table
+            thead
+                td ID
+                td Name
+                td Location
+            each user in users
+                tr
+                    td #{user.userId}
+                    td #{user.name}
+                    td #{user.location}
+        
+        pre= JSON.stringify(users, null, 2)
+    else
+        p There's no one yet x.X
+    script.
+        console.log(!{JSON.stringify(users)})
+        

@@ -1,0 +1,6 @@
+extends layout
+
+block content
+    h1 The list of #{lunches.length} the lunches in the world
+    each lunch in lunches
+        p #{lunch.name}
